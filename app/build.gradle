@@ -25,11 +25,13 @@ android {
         versionCode 33
         versionName "1.2.3+"
 
-        applicationId "io.github.gsantner.memetastic"
+        applicationId "com.sanjay.memecreator.memetastic"
 
         buildConfigField "boolean", "IS_TEST_BUILD", "false"
         buildConfigField "boolean", "IS_GPLAY_BUILD", "false"
-        buildConfigField("String[]", "APPLICATION_LANGUAGES", '{' + getUsedAndroidLanguages().collect {"\"${it}\""}.join(",")  + '}')
+        buildConfigField("String[]", "APPLICATION_LANGUAGES", '{' + getUsedAndroidLanguages().collect {
+            "\"${it}\""
+        }.join(",") + '}')
     }
     buildTypes {
         release {
@@ -45,7 +47,7 @@ android {
             buildConfigField "boolean", "IS_GPLAY_BUILD", "true"
         }
         flavorTest {
-            applicationId "io.github.gsantner.memetastic.test"
+            applicationId "com.sanjay.memecreator.memetastic.test"
             versionCode = Integer.parseInt(new Date().format('yyMMdd'))
             versionName = new Date().format('yyMMdd')
             buildConfigField "boolean", "IS_TEST_BUILD", "true"
@@ -78,7 +80,6 @@ static String[] getUsedAndroidLanguages() {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
 
     // Android standard libs
     compile "com.android.support:appcompat-v7:${version_lib.appcompat}"
@@ -88,12 +89,14 @@ dependencies {
     compile "com.android.support:recyclerview-v7:${version_lib.appcompat}"
 
     // UI libraries
-    compile 'com.github.DASAR:ShiftColorPicker:v0.5'
 
     // Tool libraries
     compile "com.jakewharton:butterknife:${version_lib.butterknife}"
-
     annotationProcessor "com.jakewharton:butterknife-compiler:${version_lib.butterknife}"
+    compile 'com.github.DASAR:ShiftColorPicker:v0.5'
+    compile 'com.google.firebase:firebase-core:10.0.1'
+    compile 'com.google.firebase:firebase-ads:10.0.1'
+    testCompile 'junit:junit:4.12'
 }
 
 preBuild.doFirst {
@@ -119,3 +122,5 @@ task copyRepoFiles(type: Copy) {
     }
 }
 tasks.copyRepoFiles.execute()
+
+apply plugin: 'com.google.gms.google-services'

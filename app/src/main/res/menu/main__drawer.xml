@@ -23,10 +23,10 @@
     <group
         android:id="@+id/nav1"
         android:checkableBehavior="none">
-        <item
-            android:id="@+id/action_about"
-            android:icon="@drawable/ic_info_black_48px"
-            android:title="@string/about" />
+        <!--<item-->
+        <!--android:id="@+id/action_about"-->
+        <!--android:icon="@drawable/ic_info_black_48px"-->
+        <!--android:title="@string/about" />-->
 
         <item
             android:id="@+id/action_settings"
@@ -40,22 +40,22 @@
     </group>
 
 
-    <group
-        android:id="@+id/nav2"
-        android:checkableBehavior="none">
-        <item
-            android:id="@+id/action_recommend"
-            android:icon="@drawable/ic_thumb_up_black_48px"
-            android:title="@string/main__recommend_app" />
-        <item
-            android:id="@+id/action_donate_bitcoin"
-            android:icon="@drawable/ic_favorite_white_48px"
-            android:title="@string/main__donate"
-            android:visible="false" />
+    <!--<group-->
+    <!--android:id="@+id/nav2"-->
+    <!--android:checkableBehavior="none">-->
+    <!--<item-->
+    <!--android:id="@+id/action_recommend"-->
+    <!--android:icon="@drawable/ic_thumb_up_black_48px"-->
+    <!--android:title="@string/main__recommend_app" />-->
+    <!--<item-->
+    <!--android:id="@+id/action_donate_bitcoin"-->
+    <!--android:icon="@drawable/ic_favorite_white_48px"-->
+    <!--android:title="@string/main__donate"-->
+    <!--android:visible="false" />-->
 
-        <item
-            android:id="@+id/action_homepage_code"
-            android:icon="@drawable/ic_language_white_48px"
-            android:title="@string/code" />
-    </group>
+    <!--<item-->
+    <!--android:id="@+id/action_homepage_code"-->
+    <!--android:icon="@drawable/ic_language_white_48px"-->
+    <!--android:title="@string/code" />-->
+    <!--</group>-->
 </menu>

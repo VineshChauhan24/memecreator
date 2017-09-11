@@ -11,10 +11,10 @@ works offline and adds no watermarks. Memes can be created from templates includ
 into the app and pictures from gallery & camera.
 
 <div style="display:flex;" >
-<a href="https://f-droid.org/repository/browse/?fdid=io.github.gsantner.memetastic">
+<a href="https://f-droid.org/repository/browse/?fdid=com.sanjay.memecreator.memetastic">
     <img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="80">
 </a>
-<a href="https://play.google.com/store/apps/details?id=io.github.gsantner.memetastic">
+<a href="https://play.google.com/store/apps/details?id=com.sanjay.memecreator.memetastic">
     <img alt="Get it on Google Play" height="80" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" />
 </a>
 </div></br>
@@ -67,7 +67,7 @@ If you like my work on <b>MemeTastic</b> and many other Open Source projects, co
 
 #### Resources
 * Project: [Changelog](/CHANGELOG.md) | [Issues level/beginner](https://github.com/gsantner/memetastic/issues?q=is%3Aissue+is%3Aopen+label%3Alevel%2Fbeginner) | [License](/LICENSE.txt) | [CoC](/CODE_OF_CONDUCT.md)
-* App on F-Droid: [Metadata](https://gitlab.com/fdroid/fdroiddata/blob/master/metadata/io.github.gsantner.memetastic.txt) | [Page](https://f-droid.org/packages/io.github.gsantner.memetastic/) | [Wiki](https://f-droid.org/wiki/page/io.github.gsantner.memetastic) | [Build log](https://f-droid.org/wiki/page/io.github.gsantner.memetastic/lastbuild)
+* App on F-Droid: [Metadata](https://gitlab.com/fdroid/fdroiddata/blob/master/metadata/com.sanjay.memecreator.memetastic.txt) | [Page](https://f-droid.org/packages/com.sanjay.memecreator.memetastic/) | [Wiki](https://f-droid.org/wiki/page/com.sanjay.memecreator.memetastic) | [Build log](https://f-droid.org/wiki/page/com.sanjay.memecreator.memetastic/lastbuild)
  
 ## Licensing
 Co pyright (C) 2016-2017 MemeTastic contributors <https://github.com/gsantner/memetastic>  

@@ -1,15 +1,15 @@
 <resources>
 
     <!-- General -->
-    <string name="app_name" translatable="false">MemeTastic</string>
-    <string name="app_fileprovider" translatable="false">io.github.gsantner.memetastic.fileprovider</string>
+    <string name="app_name" translatable="false">Memecreator</string>
+    <string name="app_fileprovider" translatable="false">com.sanjay.memecreator.memetastic.fileprovider</string>
     <string name="app_www_source" translatable="false">https://github.com/gsantner/memetastic</string>
 
     <string name="info_author" translatable="false">Gregor Santner\ngsantner AT mailbox DOT org\ngsantner.github.io\n\nMatthias Ringwald</string>
     <string name="page_additional_contact_text" translatable="false">GitHub\nhttps://github.com/gsantner/memetastic</string>
     <string name="code" translatable="false">Code</string>
 
-    <string name="app_description" translatable="false">much meme. very wow.</string>
+    <string name="app_description" translatable="false">meme creator</string>
     <string name="main__ready_to_memetastic" translatable="false">Ready to MemeTastic? Try it now!\n%1$s</string>
 
     <!-- pictures -->
@@ -32,7 +32,7 @@
         \n**Get the official version of MemeTastic:**
         \n
             [Source code](https://github.com/gsantner/memetastic) | [Homepage](https://gsantner.github.io/#MemeTastic)
-        \n[Google Play](https://play.google.com/store/apps/details?id=io.github.gsantner.memetastic)~°| [F-Droid](https://f-droid.org/repository/browse/?fdid=io.github.gsantner.memetastic)
+        \n[Google Play](https://play.google.com/store/apps/details?id=com.sanjay.memecreator.memetastic)~°| [F-Droid](https://f-droid.org/repository/browse/?fdid=com.sanjay.memecreator.memetastic)
         \n
         \nThis program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
         \n

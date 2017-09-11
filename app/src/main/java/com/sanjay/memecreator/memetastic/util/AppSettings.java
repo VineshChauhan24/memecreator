@@ -1,0 +1,209 @@
+package com.sanjay.memecreator.memetastic.util;
+
+import android.content.Context;
+
+import com.sanjay.memecreator.memetastic.App;
+import com.sanjay.memecreator.memetastic.BuildConfig;
+import com.sanjay.memecreator.memetastic.R;
+import com.sanjay.memecreator.opoc.util.AppSettingsBase;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class AppSettings extends AppSettingsBase {
+    private static final int MAX_FAVS = 50;
+    private static boolean PACKAGE_CHECKED = false;
+
+    //#####################
+    //## Methods
+    //#####################
+    private AppSettings(Context context) {
+        super(context);
+    }
+
+    public static AppSettings get() {
+        AppSettings appSettings = new AppSettings(App.get());
+
+
+        /*
+         * Check if a MemeTastic package ID was used to build the app.
+         * If you release something based on MemeTastic you will want to remove the lines below.
+         * In any case: You MUST release the full source code.
+         *
+         * If you publish an app based on MemeTastic you MUST
+         *   Comply with the terms of GPLv3 - See https://www.gnu.org/licenses/gpl-3.0.html
+         *   Keep existing copyright notices in the app and publish full source code
+         *   Show that the app is `based on MemeTastic by MemeTastic developers and contributors`. Include a link to https://github.com/gsantner/memetastic
+         *   Show that the app is not MemeTastic but an modified/custom version, and the original app developers or contributors are not responsible for modified versions
+         *   Not use MemeTastic as app name
+         *
+         *  See more details at
+         *  https://github.com/gsantner/memetastic/blob/master/README.md#licensing
+         */
+        if (!PACKAGE_CHECKED) {
+            PACKAGE_CHECKED = true;
+            String pkg = appSettings.getContext().getPackageName();
+            if (!pkg.equals("com.sanjay.memecreator.memetastic") && !pkg.equals("com.sanjay.memecreator.memetastic.test")) {
+                String message = "\n\n\n" +
+                        "++++  WARNING: MemeTastic is licensed GPLv3.\n" +
+                        "++++  If you distribute the app you MUST publish the full source code.\n" +
+                        "++++  See https://github.com/gsantner/memetastic for more details.\n" +
+                        "++++  This warning is placed in util/AppSettings.java->get()\n\n\n";
+                throw new RuntimeException(message);
+            }
+        }
+        return appSettings;
+    }
+
+    // Adds a String to a String array and cuts of the last values to match a maximal size
+    private static String[] insertAndMaximize(String[] values, String value, int maxSize) {
+        List<String> list;
+        if (values == null)
+            list = new ArrayList<>();
+        else
+            list = new ArrayList<>(Arrays.asList(values));
+        list.add(0, value);
+        while (list.size() > maxSize) {
+            list.remove(maxSize - 1);
+        }
+        return list.toArray(new String[list.size()]);
+    }
+
+    public int getRenderQualityReal() {
+        int val = getInt(R.string.pref_key__render_quality_editor_percent, 24);
+        return (int) (400 + (2100.0 * (val / 100.0)));
+    }
+
+    public int getThumbnailQualityReal() {
+        // 24 should be 225. Mostly 3 will be on a phone, so 1080/3=360
+        // Additional reduction of quality to ~2/3 is roughly 225
+        // 150 is very fast loaded, but blurry, 200 is still a little blurry, 225 seems to be
+        // a good tradeoff between quality (400-600) and speed (-125)
+        int val = getInt(R.string.pref_key__thumbnail_quality__percent, 24);
+        return (int) (100 + (939 * (val / 100.0)));
+    }
+
+    public int getLastSelectedFont() {
+        return getInt(R.string.pref_key__last_selected_font, 0);
+    }
+
+    public void setLastSelectedFont(int value) {
+        setInt(R.string.pref_key__last_selected_font, value);
+    }
+
+    public String[] getFavoriteMemes() {
+        return getStringArray(R.string.pref_key__meme_favourites);
+    }
+
+    public void setFavoriteMemes(String[] value) {
+        setStringArray(R.string.pref_key__meme_favourites, value);
+    }
+
+    public void appendFavoriteMeme(String meme) {
+        String[] memes = insertAndMaximize(getFavoriteMemes(), meme, MAX_FAVS);
+        setFavoriteMemes(memes);
+    }
+
+    public boolean isFavorite(String name) {
+        if (getFavoriteMemes() == null)
+            return false;
+        for (String s : getFavoriteMemes()) {
+            if (s.equalsIgnoreCase(name))
+                return true;
+        }
+        return false;
+    }
+
+    public boolean toggleFavorite(String name) {
+        if (!isFavorite(name)) {
+            appendFavoriteMeme(name);
+            return true;
+        }
+        removeFavorite(name);
+        return false;
+    }
+
+    public void removeFavorite(String name) {
+        String[] favs = getFavoriteMemes();
+        ArrayList<String> newFavs = new ArrayList<String>();
+
+        for (String fav : favs) {
+            if (!fav.equalsIgnoreCase(name))
+                newFavs.add(fav);
+        }
+        setFavoriteMemes(newFavs.toArray(new String[newFavs.size()]));
+    }
+
+    public int getLastSelectedTab() {
+        return getInt(R.string.pref_key__last_selected_tab, 0);
+    }
+
+    public void setLastSelectedTab(int value) {
+        setInt(R.string.pref_key__last_selected_tab, value);
+    }
+
+    public int getGridColumnCountPortrait() {
+        int count = getInt(R.string.pref_key__grid_column_count_portrait, -1);
+        if (count == -1) {
+            count = 3 + (int) Math.max(0, 0.5 * (Helpers.get().getEstimatedScreenSizeInches() - 5.0));
+            setGridColumnCountPortrait(count);
+        }
+        return count;
+    }
+
+    public void setGridColumnCountPortrait(int value) {
+        setInt(R.string.pref_key__grid_column_count_portrait, value);
+    }
+
+    public int getGridColumnCountLandscape() {
+        int count = getInt(R.string.pref_key__grid_column_count_landscape, -1);
+        if (count == -1) {
+            count = (int) (getGridColumnCountPortrait() * 1.8);
+            setGridColumnCountLandscape(count);
+        }
+        return count;
+    }
+
+    public void setGridColumnCountLandscape(int value) {
+        setInt(R.string.pref_key__grid_column_count_landscape, value);
+    }
+
+    public boolean isAppFirstStart(boolean doSet) {
+        boolean value = getBool(R.string.pref_key__app_first_start, true);
+        if (doSet) {
+            setBool(R.string.pref_key__app_first_start, false);
+        }
+        return value;
+    }
+
+    public boolean isAppCurrentVersionFirstStart() {
+        int value = getInt(R.string.pref_key__app_first_start_current_version, -1);
+        setInt(R.string.pref_key__app_first_start_current_version, BuildConfig.VERSION_CODE);
+        return value != BuildConfig.VERSION_CODE && !BuildConfig.IS_TEST_BUILD;
+    }
+
+    public boolean isAutoSaveMeme() {
+        return getBool(R.string.pref_key__auto_save_meme, false);
+    }
+
+    public int getDefaultMainMode() {
+        return getIntOfStringPref(R.string.pref_key__default_main_mode, 0);
+    }
+
+    public boolean isShuffleMemeCategories() {
+        return getBool(R.string.pref_key__is_shuffle_meme_categories, false);
+    }
+
+    public boolean isEditorStatusBarHidden() {
+        return getBool(R.string.pref_key__is_editor_statusbar_hidden, false);
+    }
+
+    public boolean isOverviewStatusBarHidden() {
+        return getBool(R.string.pref_key__is_overview_statusbar_hidden, false);
+    }
+
+    public String getLanguage() {
+        return getString(R.string.pref_key__language, "");
+    }
+}
